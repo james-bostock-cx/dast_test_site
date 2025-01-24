@@ -27,6 +27,10 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
+@app.route('/')
+def root():
+    return render_template('login.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
