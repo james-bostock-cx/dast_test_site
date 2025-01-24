@@ -59,7 +59,8 @@ env:
 jobs:
     - parameters: {}
       type: passiveScan-config
-    - parameters: {}
+    - parameters:
+        user: User01
       tests:
         - name: At least 100 URLs found
           onFail: INFO
@@ -68,7 +69,50 @@ jobs:
           type: stats
           value: 100
       type: spider
-    - parameters: {}
+    - parameters:
+        user: User02
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: automation.spider.urls.added
+          type: stats
+          value: 100
+      type: spider
+    - parameters:
+        context: Second Default Context
+        user: Admin
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: automation.spider.urls.added
+          type: stats
+          value: 100
+      type: spider
+    - parameters:
+        user: User01
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: spiderAjax.urls.added
+          type: stats
+          value: 100
+      type: spiderAjax
+    - parameters:
+        user: User02
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: spiderAjax.urls.added
+          type: stats
+          value: 100
+      type: spiderAjax
+    - parameters:
+        context: Second Default Context
+        user: Admin
       tests:
         - name: At least 100 URLs found
           onFail: INFO
@@ -79,7 +123,17 @@ jobs:
       type: spiderAjax
     - parameters: {}
       type: passiveScan-wait
-    - parameters: {}
+    - parameters:
+        user: User01
+      policyDefinition: {}
+      type: activeScan
+    - parameters:
+        user: User02
+      policyDefinition: {}
+      type: activeScan
+    - parameters:
+        context: Second Default Context
+        user: Admin
       policyDefinition: {}
       type: activeScan
     - parameters:
