@@ -62,3 +62,30 @@ On Windows:
 ```
 .\run.ps1
 ```
+
+# Running the DAST CLI
+
+The repository contains a sample configuration file `dast_test_site.yaml`
+and a driver script, `dast_test_site.sh` (PowerShell version to come) that
+simplifies running the DAST CLI. You will need to update the URLs in the
+configuration file to match your environment. Assuming that you are running
+both the Flask application and the DAST CLI on the same server, you should
+use the IP address of your server (e.g., the IP address in the file,
+172.35.1.122 is that of the AWS EC2 instance in which I have been testing
+this).
+
+To use the driver script, you need to set the `API_KEY` environment to your
+Checkmarx One API key.
+
+The driver script has one mandatory argument: the Checkmarx One environment
+id, which is specified using the `--environment-id` command line argument.
+For example:
+```
+./dast_test_site.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
+```
+
+Other arguments that the DAST CLI accepts can also be passed to the driver
+script. For example:
+```
+./dast_test_site.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
+```

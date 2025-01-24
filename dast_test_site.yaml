@@ -1,0 +1,91 @@
+env:
+    contexts:
+        - authentication:
+            method: form
+            parameters:
+                loginPageUrl: http://172.35.1.122:5000/login
+                loginRequestBody: email=%username%&password=%password%
+                loginRequestUrl: http://172.35.1.122:5000/login
+            verification:
+                loggedInRegex: Logged in as
+                loggedOutRegex: Not logged in
+                method: response
+          includePaths:
+            - http://172.35.1.122:5000/.*
+          name: First Default Context
+          sessionManagement:
+            method: cookie
+          structure: {}
+          technology: {}
+          urls:
+            - http://172.35.1.122:5000
+          users:
+            - credentials:
+                password: User01-123!
+                username: user01
+              name: User01
+            - credentials:
+                password: User02-123!
+                username: user02
+              name: User02
+        - authentication:
+            method: form
+            parameters:
+                loginPageUrl: http://172.35.1.122:5000/altlogin
+                loginRequestBody: email=%username%&password=%password%
+                loginRequestUrl: http://172.35.1.122:5000/altlogin
+            verification:
+                loggedInRegex: Logged in as
+                loggedOutRegex: Not logged in
+                method: response
+          includePaths:
+            - http://172.35.1.122:5000/.*
+          name: Second Default Context
+          sessionManagement:
+            method: cookie
+          structure: {}
+          technology: {}
+          urls:
+            - http://172.35.1.122:5000
+          users:
+            - credentials:
+                password: admin123!
+                username: admin
+              name: Admin
+    parameters:
+        failOnError: true
+        failOnWarning: false
+        progressToStdout: true
+jobs:
+    - parameters: {}
+      type: passiveScan-config
+    - parameters: {}
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: automation.spider.urls.added
+          type: stats
+          value: 100
+      type: spider
+    - parameters: {}
+      tests:
+        - name: At least 100 URLs found
+          onFail: INFO
+          operator: '>='
+          statistic: spiderAjax.urls.added
+          type: stats
+          value: 100
+      type: spiderAjax
+    - parameters: {}
+      type: passiveScan-wait
+    - parameters: {}
+      policyDefinition: {}
+      type: activeScan
+    - parameters:
+        reportDescription: ""
+        reportDir: /demo/test_output/dast-output-2740813125
+        reportFile: ZAP-Report
+        reportTitle: ZAP by Checkmarx Scanning Report
+        template: traditional-json-plus
+      type: report
