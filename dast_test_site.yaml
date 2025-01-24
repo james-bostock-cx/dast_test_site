@@ -4,7 +4,7 @@ env:
             method: form
             parameters:
                 loginPageUrl: http://172.35.1.122:5000/login
-                loginRequestBody: email=%username%&password=%password%
+                loginRequestBody: username=%username%&password=%password%
                 loginRequestUrl: http://172.35.1.122:5000/login
             verification:
                 loggedInRegex: Logged in as
@@ -32,7 +32,7 @@ env:
             method: form
             parameters:
                 loginPageUrl: http://172.35.1.122:5000/altlogin
-                loginRequestBody: email=%username%&password=%password%
+                loginRequestBody: username=%username%&password=%password%
                 loginRequestUrl: http://172.35.1.122:5000/altlogin
             verification:
                 loggedInRegex: Logged in as
