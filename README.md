@@ -63,6 +63,45 @@ On Windows:
 .\run.ps1
 ```
 
+# Adding Users
+
+When the application is first started, there are no users. As some pages
+are only accessible if a user has logged in, some users need to be created.
+This can be done via the `/register` endpoint. Each user has three properties:
+
+- Username
+- Password
+- Role
+
+The role can be one of the following (case-insensitive):
+
+- Admin
+- Altuser
+- User
+
+The role determines which pages are displayed (users with the "Admin" role
+see a special dashboard) or accessible.
+
+The sample configuration file, `dast_test_site.yaml`, gives the details of
+three users. These users should be given the following roles:
+
+- admin: Admin
+- user01: Altuser
+- user02: User
+
+The users are stored in a SQLite 3 database, `instance/users.db`. This means
+it can be queries using the **sqlite3** command (assuming it is installed):
+```
+(venv) [ec2-user@ip-172-35-1-122 dast_test_site]$ sqlite3 instance/users.db
+SQLite version 3.40.0 2023-06-02 12:56:32
+Enter ".help" for usage hints.
+sqlite> select * from user;
+1|admin|scrypt:32768:8:1$fjfy1bCXqu2ma0aa$4886314740a167272933aa390393c92acdf0c53d5524123f19e3836544a9e32b40b2e23138fb75d8f4cae0ab8cead04812ceebcddf1cf7939954ac6a9094a2d9|admin
+2|user01|scrypt:32768:8:1$3i7rCWN2oSSQ1qBT$9467d54843e2febcbdf6a34ad18106fad86bfefea8fff3832937f18d4e03ec82b9d27ac81d783c06f5719cabfd8c89881fd71f684d6d685e8f530b00fd7b4077|altuser
+3|user02|scrypt:32768:8:1$xsBvqrfOmJxofLhk$3ce3045ae467229602394306b6bfb3040b566d3c6405a96c70a1f95b740e57e34e2189ec7a9fa02e6dbb1f9f510586d1c4e534fe6e7e84a3bb6ecf4719b06a72|user
+sqlite>
+```
+
 # Running the DAST CLI
 
 The repository contains a sample configuration file `dast_test_site.yaml`
