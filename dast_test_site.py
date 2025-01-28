@@ -134,6 +134,19 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html')
 
+@app.before_request
+def log_request_info():
+    app.logger.debug(f'Request method: {request.method}')
+    app.logger.debug(f'Request headers: {request.headers}')
+    if request.method == 'POST':
+        app.logger.debug(f'Request body: {request.get_data()}')
+
+@app.after_request
+def log_response_info(response):
+    app.logger.debug(f'Response headers: {response.headers}')
+    app.logger.debug(f'Response body: {response.get_data()}')
+    return response
+
 if __name__ == '__main__':
     with app.app_context():
         create_tables()
