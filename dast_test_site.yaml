@@ -12,7 +12,7 @@ env:
                 method: response
           includePaths:
             - http://172.35.1.122:5000/.*
-          name: "Default Context"
+          name: Default Context
           sessionManagement:
             method: cookie
           structure: {}
@@ -40,7 +40,7 @@ env:
                 method: response
           includePaths:
             - http://172.35.1.122:5000/.*
-          name: "Alternate Context"
+          name: Alternate Context
           sessionManagement:
             method: cookie
           structure: {}
@@ -80,7 +80,7 @@ jobs:
           value: 100
       type: spider
     - parameters:
-        context: "Alternate Context"
+        context: Alternate Context
         user: Admin
       tests:
         - name: At least 100 URLs found
@@ -111,7 +111,7 @@ jobs:
           value: 100
       type: spiderAjax
     - parameters:
-        context: "Alternate Context"
+        context: Alternate Context
         user: Admin
       tests:
         - name: At least 100 URLs found
@@ -132,7 +132,7 @@ jobs:
       policyDefinition: {}
       type: activeScan
     - parameters:
-        context: "Alternate Context"
+        context: Alternate Context
         user: Admin
       policyDefinition: {}
       type: activeScan
