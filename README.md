@@ -55,12 +55,12 @@ Bash and PowerShell scripts are provided to simplify running the application.
 
 On Linux:
 ```
-./run.sh
+./run_test_site.sh
 ```
 
 On Windows:
 ```
-.\run.ps1
+.\run_test_site.ps1
 ```
 
 # Adding Users
@@ -105,7 +105,7 @@ sqlite>
 # Running the DAST CLI
 
 The repository contains a sample configuration file `dast_test_site.yaml`
-and a driver script, `dast_test_site.sh` (PowerShell version to come) that
+and a driver script, `run_dast_scan.sh` (PowerShell version to come) that
 simplifies running the DAST CLI. You will need to update the URLs in the
 configuration file to match your environment. Assuming that you are running
 both the Flask application and the DAST CLI on the same server, you should
@@ -120,11 +120,11 @@ The driver script has one mandatory argument: the Checkmarx One environment
 id, which is specified using the `--environment-id` command line argument.
 For example:
 ```
-./dast_test_site.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
+./run_dast_scan.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
 ```
 
 Other arguments that the DAST CLI accepts can also be passed to the driver
 script. For example:
 ```
-./dast_test_site.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
+./run_dast_scan.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
 ```
