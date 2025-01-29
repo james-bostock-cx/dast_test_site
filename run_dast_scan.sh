@@ -12,7 +12,6 @@ fi
 docker run -e CX_APIKEY=$API_KEY \
        	-v $(pwd):/demo checkmarx/dast:latest \
        	web \
-       	--base-url=https://anz.ast.checkmarx.net/ \
        	--output=/demo/test_output \
        	--timeout=10000 \
        	--update-interval=10 \

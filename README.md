@@ -116,15 +116,17 @@ this).
 To use the driver script, you need to set the `API_KEY` environment to your
 Checkmarx One API key.
 
-The driver script has one mandatory argument: the Checkmarx One environment
-id, which is specified using the `--environment-id` command line argument.
+The driver script has two mandatory arguments: the base URL of the Checkmarx
+One tenant, which is specified using the `--base-url` command line flag,
+and the Checkmarx One environment id, which is specified using the
+`--environment-id` command line flag.
 For example:
 ```
-./run_dast_scan.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
+./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
 ```
 
 Other arguments that the DAST CLI accepts can also be passed to the driver
 script. For example:
 ```
-./run_dast_scan.sh --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
+./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
 ```
