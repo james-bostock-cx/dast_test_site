@@ -9,7 +9,7 @@ fi
 # Note that the current directory is mounted on /demo so, if the config file
 # is in the current directory, the --config argument shoud be /demo/<file>
 
-docker run -e CX_APIKEY=$API_KEY \
+docker run -e CX_APIKEY=$API_KEY --rm \
        	-v $(pwd):/demo checkmarx/dast:latest \
        	web \
        	--output=/demo/test_output \
