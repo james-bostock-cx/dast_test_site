@@ -113,8 +113,8 @@ use the IP address of your server (e.g., the IP address in the file,
 172.35.1.122 is that of the AWS EC2 instance in which I have been testing
 this).
 
-To use the driver script, you need to set the `API_KEY` environment to your
-Checkmarx One API key.
+To use the driver script, you need to set the `API_KEY` environment variable
+to your Checkmarx One API key.
 
 The driver script has three mandatory arguments: the base URL of the Checkmarx
 One tenant, which is specified using the `--base-url` command line flag;
