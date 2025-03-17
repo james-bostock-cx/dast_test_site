@@ -116,17 +116,21 @@ this).
 To use the driver script, you need to set the `API_KEY` environment to your
 Checkmarx One API key.
 
-The driver script has two mandatory arguments: the base URL of the Checkmarx
-One tenant, which is specified using the `--base-url` command line flag,
-and the Checkmarx One environment id, which is specified using the
-`--environment-id` command line flag.
+The driver script has three mandatory arguments: the base URL of the Checkmarx
+One tenant, which is specified using the `--base-url` command line flag;
+the Checkmarx One environment id, which is specified using the
+`--environment-id` command line flag; and the location of the configuration
+file, which is specified using the `--config` command line flag. Note that
+the driver script mounts the current directory on the `/demo` mountpoint so
+the configuration file should be prefixed with `/demo/`.
+
 For example:
 ```
-./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1
+./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --config /demo/dast_test_site.yaml
 ```
 
 Other arguments that the DAST CLI accepts can also be passed to the driver
 script. For example:
 ```
-./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --log-level debug
+./run_dast_scan.sh --base-url https://anz.ast.checkmarx.net --environment-id f0812034-502f-4431-b758-a3ee5c395ac1 --config /demo/dast_test_site.yaml --log-level debug
 ```
