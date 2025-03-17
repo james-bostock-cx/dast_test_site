@@ -90,7 +90,7 @@ three users. These users should be given the following roles:
 - user02: User
 
 The users are stored in a SQLite 3 database, `instance/users.db`. This means
-it can be queries using the **sqlite3** command (assuming it is installed):
+it can be queried using the **sqlite3** command (assuming it is installed):
 ```
 (venv) [ec2-user@ip-172-35-1-122 dast_test_site]$ sqlite3 instance/users.db
 SQLite version 3.40.0 2023-06-02 12:56:32
