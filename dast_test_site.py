@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash
+from flask import Flask, jsonify, render_template, redirect, url_for, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -67,6 +67,26 @@ def altlogin():
         flash('Invalid credentials', 'danger')
         return render_template('altlogin.html'), 401
     return render_template('altlogin.html')
+
+@app.route('/jsonlogin', methods=['GET', 'POST'])
+def jsonlogin():
+    if 'user_id' in session:
+        flash('You are already logged in.', 'info')
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        data = request.get_json()
+        if data:
+            username = data['username']
+            password = data['password']
+            user = User.query.filter_by(username=username).first()
+            if user and check_password_hash(user.password, password):
+                session['user_id'] = user.id
+                session['role'] = user.role
+                flash('Login successful!', 'success')
+                return jsonify({'message':'Login successful'})
+            return jsonify({'message':'Invalid credentials'}), 401
+        return jsonify({'message':'Unable to read JSON payload'}), 500
+    return render_template('jsonlogin.html')
 
 @app.route('/logout')
 def logout():

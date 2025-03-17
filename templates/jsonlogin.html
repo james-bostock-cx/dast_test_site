@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>JSON Login</h2>
+<form id="json-login-form">
+    <label>Username:</label>
+    <input type="text" name="username" required>
+    <label>Password:</label>
+    <input type="password" name="password" required>
+    <button type="button" onclick="submitform()">Login</button>
+</form>
+<script type="text/javascript">
+function submitform() {
+    var form = document.forms[0];
+    var xhr = new XMLHttpRequest();
+    var data = new FormData(form);
+    xhr.open('POST', '/jsonlogin');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(Object.fromEntries(data)));
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            var response = JSON.parse(xhr.responseText);
+            switch (xhr.status) {
+                case 200:
+                    window.location.href = '/dashboard';
+                    break;
+                default:
+                    alert(response.message);
+                    form.reset();
+                    break;
+	    }
+	}
+    }
+    return false;
+}
+</script>
+{% endblock %}

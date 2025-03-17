@@ -16,5 +16,4 @@ docker run -e CX_APIKEY=$API_KEY --rm \
        	--timeout=10000 \
        	--update-interval=10 \
        	--jvm-properties=-Xmx3G \
-	--config=/demo/dast_test_site.yaml \
 	"$@"

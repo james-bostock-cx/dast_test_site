@@ -1,0 +1,58 @@
+env:
+    contexts:
+        - authentication:
+            method: json
+            parameters:
+                loginPageUrl: http://172.35.1.11:5000/jsonlogin
+                loginRequestBody: '{"username":"{%username%}","password":"{%password%}"}'
+                loginRequestUrl: http://172.35.1.11:5000/jsonlogin
+            verification:
+                loggedInRegex: Logged in as
+                loggedOutRegex: Not logged in
+                method: response
+          includePaths:
+            - http://172.35.1.11:5000/.*
+          name: Default Context
+          sessionManagement:
+            method: cookie
+          structure: {}
+          technology: {}
+          urls:
+            - http://172.35.1.11:5000
+          users:
+            - credentials:
+                password: User01-123!
+                username: user01
+              name: User01
+    parameters:
+        failOnError: true
+        failOnWarning: false
+        progressToStdout: true
+jobs:
+    - parameters: {}
+      type: passiveScan-config
+    - parameters:
+        user: User01
+      type: spider
+    - parameters:
+        user: User01
+      type: spiderAjax
+    - parameters: {}
+      type: passiveScan-wait
+    - parameters:
+        user: User01
+      policyDefinition: {}
+      type: activeScan
+    - parameters:
+        reportDescription: ""
+        reportDir: /demo/test_output/dast-output-4268175565
+        reportFile: ZAP-Report
+        reportTitle: ZAP by Checkmarx Scanning Report
+        template: traditional-json-plus
+      type: report
+    - name: export
+      parameters:
+        fileName: /demo/test_output/dast-output-4268175565/ZAP-Sites-Tree.yaml
+        source: sitestree
+        type: yaml
+      type: export
